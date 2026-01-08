@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Crime System</title>
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+<div class="auth-container">
+  <h2>Create Account</h2>
+  <p class="subtitle">Register for the Crime Information System</p>
+
+  <form action="register.php" method="POST" id="registerForm">
+
+    <label>Role</label>
+    <select name="role" id="roleSelect" required onchange="toggleFields(this.value)">
+      <option value="">Select role</option>
+      <option value="police">Police Officer</option>
+      <option value="organization">Organization</option>
+    </select>
+
+    <div id="policeField" style="display:none;">
+      <label>Police ID</label>
+      <input type="text" name="police_id" id="police_id" placeholder="Enter your Police ID">
+      
+      <label>Station Name</label>
+      <input type="text" name="station_name" id="station_name" placeholder="Enter your station name">
+    </div>
+
+    <div id="orgField" style="display:none;">
+      <label>Organization Name</label>
+      <input type="text" name="organization_name" id="organization_name" placeholder="Enter organization name">
+    </div>
+
+    <label>Email</label>
+    <input type="email" name="email" required placeholder="Enter your email">
+
+    <label>Password</label>
+    <input type="password" name="password" required minlength="6" placeholder="Minimum 6 characters">
+
+    <button type="submit">Register</button>
+
+    <div class="switch">
+      Already have an account? <a href="login.html">Login</a>
+    </div>
+
+  </form>
+</div>
+
+<script>
+function toggleFields(role) {
+  const policeField = document.getElementById("policeField");
+  const orgField = document.getElementById("orgField");
+  const policeInput = document.getElementById("police_id");
+  const stationInput = document.getElementById("station_name");
+  const orgInput = document.getElementById("organization_name");
+
+  if (role === "police") {
+    policeField.style.display = "block";
+    orgField.style.display = "none";
+    policeInput.required = true;
+    stationInput.required = true;
+    orgInput.required = false;
+    orgInput.value = "";
+  } else if (role === "organization") {
+    policeField.style.display = "none";
+    orgField.style.display = "block";
+    policeInput.required = false;
+    stationInput.required = false;
+    orgInput.required = true;
+    policeInput.value = "";
+    stationInput.value = "";
+  } else {
+    policeField.style.display = "none";
+    orgField.style.display = "none";
+    policeInput.required = false;
+    stationInput.required = false;
+    orgInput.required = false;
+  }
+}
+</script>
+
+</body>
+</html>
